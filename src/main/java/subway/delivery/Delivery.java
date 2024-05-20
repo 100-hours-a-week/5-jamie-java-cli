@@ -17,7 +17,6 @@ public class Delivery {
     }
 
     public void processDelivery() {
-//        System.out.println("============== KAKAOWAY ==============");
         System.out.println("=     배달 주소와 전화번호를 입력해주세요.    =");
         System.out.println("======================================");
 
@@ -33,7 +32,6 @@ public class Delivery {
         assignDeliveryTime();
 
         System.out.println("=       배달 예정 시간은 " + this.deliveryTime + " 입니다.      =");
-//        System.out.println("======================================");
 
         updateStatus("배달중");
 

@@ -30,9 +30,9 @@ public class Order {
 
         if (input == 1) {
             System.out.println("샌드위치 주문하기");
-//            orderSandwich();
+            // TODO: sandwich 주문
         } else if (input == 2) {
-//            orderExtraMenu();
+            // TODO: extraMenu 주문
         } else {
             System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
             start();
@@ -41,17 +41,7 @@ public class Order {
         processOrder();
     }
 
-//    public void addSandwich(Sandwich sandwich) {
-//        this.sandwich = sandwich;
-//    }
-//
-//    public void addExtraMenu(ExtraMenu extraMenu) {
-//        this.extraMenu = extraMenu;
-//    }
-
-    public void calculatePrice() {
-
-    }
+    // TODO: calculateTotalPrice() 메소드 구현
 
     public void processOrder() {
         System.out.println("============== KAKAOWAY ==============");
