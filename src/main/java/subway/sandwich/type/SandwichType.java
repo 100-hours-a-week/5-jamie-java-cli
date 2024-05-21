@@ -1,4 +1,4 @@
-package subway.maker.type;
+package subway.sandwich.type;
 
 import java.util.HashMap;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package subway.maker.ingredients;
+package subway.sandwich.ingredients;
 
 import java.util.List;
 
