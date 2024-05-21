@@ -1,4 +1,4 @@
-package subway.maker.ingredients;
+package subway.sandwich.ingredients;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,6 +62,8 @@ public class Topping extends Ingredient {
         System.out.println("============== KAKAOWAY ==============");
         System.out.println("=     [4] 추가 토핑을 선택해주세요. (1~8)  =");
         System.out.println("=                                    =");
+        System.out.println("=    선택하지 않으실 경우 엔터를 눌러주세요.   =");
+        System.out.println("=                                    =");
         System.out.println("=          2개 이상의 토핑 추가 시        =");
         System.out.println("=       숫자를 **띄어서** 입력해주세요.     =");
         System.out.println("=      모두 선택하시려면 0을 입력해주세요.    =");
@@ -81,7 +83,9 @@ public class Topping extends Ingredient {
             Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
 
-            if (!input.matches("^[0-9 ]*$")) {
+            if (input.trim().isEmpty()) {
+                break;
+            } else if (!input.matches("^[0-9 ]*$")) {
                 System.out.println("============== KAKAOWAY ==============");
                 System.out.println("=           숫자를 입력해주세요.          =");
                 System.out.println("======================================");
@@ -112,11 +116,11 @@ public class Topping extends Ingredient {
             }
         } while (true);
 
-        for (int selectedNum : selectedNumList) {
-            String selectedType = (String) toppingTypes.keySet().toArray()[selectedNum - 1];
-            this.select(selectedType, toppingTypes.get(selectedType));
+        if (!selectedNumList.isEmpty()) {
+            for (int selectedNum : selectedNumList) {
+                String selectedType = (String) toppingTypes.keySet().toArray()[selectedNum - 1];
+                this.select(selectedType, toppingTypes.get(selectedType));
+            }
         }
     }
-
-
 }

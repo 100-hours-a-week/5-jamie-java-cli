@@ -1,63 +1,150 @@
 package subway.order;
 
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 import subway.delivery.Delivery;
 
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
-import subway.maker.SandwichMaker;
+import subway.extraMenu.ExtraMenu;
+import subway.extraMenu.ExtraMenuAdder;
+import subway.sandwich.Sandwich;
+import subway.sandwich.SandwichMaker;
 
 public class Order {
 
     Scanner sc = new Scanner(System.in);
     SandwichMaker sandwichMaker = new SandwichMaker();
+    ExtraMenuAdder extraMenuAdder = new ExtraMenuAdder();
     Delivery delivery = new Delivery();
 
     boolean status;
     public static CountDownLatch latch = new CountDownLatch(1);
 
-    public Order() {}
+    ArrayList<Sandwich> sandwiches = new ArrayList<>();
+    ArrayList<ExtraMenu> extraMenus = new ArrayList<>();
+
+    public Order() {
+    }
 
     public void start() {
         System.out.println("============== KAKAOWAY ==============");
         System.out.println("=            주문을 시작합니다.          =");
         System.out.println("=     원하시는 주문을 선택해주세요. (1/2)   =");
 
+        takeOrder();
+    }
+
+    public void takeOrder() {
+        boolean isAdditionalOrder = false;
+        int nextSelection = 0;
+
+        do {
+            if (!isAdditionalOrder) {
+                System.out.println("=                                    =");
+                System.out.println("=         1. 샌드위치 주문하기           =");
+                System.out.println("=         2. 추가 메뉴 주문하기         =");
+                System.out.println("======================================");
+
+                String input = sc.nextLine();
+
+                if (input.equals("1")) {
+                    nextSelection = processSandwichOrder();
+                } else if (input.equals("2")) {
+                    nextSelection = processExtraMenuOrder();
+                } else {
+                    System.out.println("============== KAKAOWAY ==============");
+                    System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
+                }
+
+                isAdditionalOrder = true;
+            } else {
+                if (nextSelection == 1) {
+                    nextSelection = processSandwichOrder();
+                } else if (nextSelection == 2) {
+                    nextSelection = processExtraMenuOrder();
+                } else if (nextSelection == 3) {
+                    confirmOrder();
+                    break;
+                } else {
+                    System.out.println("============== KAKAOWAY ==============");
+                    System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
+                }
+            }
+
+        } while (true);
+
+    }
+
+    public int processSandwichOrder() {
+        Sandwich sandwich = sandwichMaker.makeSandwich();
+        sandwiches.add(sandwich);
+
+        return askForAdditionalOrder();
+    }
+
+    public int processExtraMenuOrder() {
+        ExtraMenu extraMenu = extraMenuAdder.addExtraMenu();
+        extraMenus.add(extraMenu);
+        System.out.println("============== KAKAOWAY ==============");
+        System.out.println("=        추가 메뉴가 추가되었습니다.       =");
+        System.out.println(extraMenu.getType());
+        System.out.println(extraMenu.getPrice());
+
+        return askForAdditionalOrder();
+    }
+
+    public int askForAdditionalOrder() {
+        System.out.println("============== KAKAOWAY ==============");
+        System.out.println("=        추가 주문을 하시겠습니까? (1~3)   =");
+
         do {
             System.out.println("=                                    =");
-            System.out.println("=         1. 샌드위치 주문하기           =");
-            System.out.println("=         2. 사이드 메뉴 주문하기         =");
+            System.out.println("=        1. 샌드위치 주문하기            =");
+            System.out.println("=        2. 추가 메뉴 주문하기           =");
+            System.out.println("=        3. 주문 완료하기               =");
             System.out.println("======================================");
 
             String input = sc.nextLine();
 
-            // 입력값이 숫자가 아니라면 다시 입력받기
-            if (!input.matches("^[0-9]*$")) {
-                System.out.println("============== KAKAOWAY ==============");
-                System.out.println("=           숫자를 입력해주세요.          =");
-                continue;
-            }
-
-            if (Integer.parseInt(input) == 1) {
-                sandwichMaker.makeSandwich();
-                break;
-            } else if (Integer.parseInt(input) == 2) {
-                // TODO: extraMenu 주문
-                break;
-            } else {
-                System.out.println("============== KAKAOWAY ==============");
-                System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
+            switch (input) {
+                case "1":
+                    return 1;
+                case "2":
+                    return 2;
+                case "3":
+                    return 3;
+                default:
+                    System.out.println("============== KAKAOWAY ==============");
+                    System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
+                    break;
             }
         } while (true);
-
-//        processOrder();
     }
 
-    // TODO: calculateTotalPrice() 메소드 구현
 
-    public void processOrder() {
+    public String calculateTotalPrice() {
+        long totalPrice = 0;
+
+        for (Sandwich sandwich : sandwiches) {
+            totalPrice += sandwich.getPrice();
+        }
+        for (ExtraMenu extraMenu : extraMenus) {
+            totalPrice += extraMenu.getPrice();
+        }
+
+        // 1000원 단위로 , 찍기
+        NumberFormat nf = NumberFormat.getInstance();
+        return nf.format(totalPrice);
+    }
+
+    public void confirmOrder() {
+        String totalPrice = calculateTotalPrice();
+
         System.out.println("============== KAKAOWAY ==============");
         System.out.println("=            주문이 완료되었습니다.       =");
-        System.out.println("=      결제 예정 금액은 100000원 입니다.   =");
+        System.out.println("=      결제 예정 금액은 " + totalPrice + "원 입니다.   =");
         System.out.println("=        결제를 진행하시겠습니까? (Y/N)    =");
         System.out.println("======================================");
 
@@ -67,7 +154,7 @@ public class Order {
             processPayment();
 
             try {
-                sandwichMaker.makeSandwich();
+                sandwichMaker.waitForSandwich();
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -85,12 +172,15 @@ public class Order {
                 this.status = true;
             }
 
-        } else {
-
+        } else if (input.equals("N") || input.equals("n")) {
             System.out.println("============== KAKAOWAY ==============");
             System.out.println("=   주문을 취소합니다. 다음에 또 이용해주세요! =");
             System.out.println("======================================");
             System.exit(0); // 프로그램 종료
+        } else {
+            System.out.println("============== KAKAOWAY ==============");
+            System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
+            System.out.println("======================================");
         }
     }
 
@@ -130,5 +220,13 @@ public class Order {
 
     public boolean getStatus() {
         return status;
+    }
+
+    public List<Sandwich> getSandwiches() {
+        return sandwiches;
+    }
+
+    public List<ExtraMenu> getExtraMenus() {
+        return extraMenus;
     }
 }
