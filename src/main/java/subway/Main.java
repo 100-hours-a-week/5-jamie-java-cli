@@ -25,15 +25,22 @@ public class Main {
         System.out.println("=      주문을 시작하시겠습니까? (Y/N)      =");
         System.out.println("======================================");
 
-        String input = sc.nextLine();
-        if (input.equals("Y") || input.equals("y")) {
-            startOrder();
-        } else {
-            System.out.println("============== KAKAOWAY ==============");
-            System.out.println("=          프로그램을 종료합니다.          =");
-            System.out.println("======================================");
-            System.exit(0); // 프로그램 종료
-        }
+        do {
+            String input = sc.nextLine();
+            if (input.equals("Y") || input.equals("y")) {
+                startOrder();
+                break;
+            } else if (input.equals("N") || input.equals("n")) {
+                System.out.println("============== KAKAOWAY ==============");
+                System.out.println("=          프로그램을 종료합니다.          =");
+                System.out.println("======================================");
+                System.exit(0); // 프로그램 종료
+            } else {
+                System.out.println("============== KAKAOWAY ==============");
+                System.out.println("= 잘못된 입력입니다. 다시 입력해주세요. (Y/N) =");
+                System.out.println("======================================");
+            }
+        } while (true);
     }
 
     public void startOrder() {
