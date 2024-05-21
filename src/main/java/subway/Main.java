@@ -1,11 +1,14 @@
 package subway;
 
 import subway.delivery.Delivery;
+import subway.extraMenu.ExtraMenu;
 import subway.order.Order;
 
 import java.util.Scanner;
+import subway.sandwich.Sandwich;
 
 public class Main {
+
     Scanner sc = new Scanner(System.in);
 
     static Order order = new Order();
@@ -28,7 +31,7 @@ public class Main {
         do {
             String input = sc.nextLine();
             if (input.equals("Y") || input.equals("y")) {
-                startOrder();
+                order.start();
                 break;
             } else if (input.equals("N") || input.equals("n")) {
                 System.out.println("============== KAKAOWAY ==============");
@@ -43,10 +46,6 @@ public class Main {
         } while (true);
     }
 
-    public void startOrder() {
-        order.start();
-    }
-
     public void completeOrder() {
         System.out.println("=                                    =");
         System.out.println("=                                    =");
@@ -55,7 +54,27 @@ public class Main {
         System.out.println("=                  🤍                =");
         System.out.println("=                                    =");
         System.out.println("=              [ 주문내역 ]            =");
-        // TODO: 주문 내역 출력
+
+        // 주문된 샌드위치 출력
+        for (Sandwich sandwich : order.getSandwiches()) {
+            System.out.println("== ============ 샌드위치 ===============");
+            System.out.println("= 샌드위치: " + sandwich.getType());
+            System.out.println("= 사이즈: " + sandwich.getSize());
+            System.out.println("= 빵: " + sandwich.getBread());
+            System.out.println("= 치즈: " + sandwich.getCheese());
+            System.out.println("= 토핑: " + sandwich.getToppings());
+            System.out.println("= 야채: " + sandwich.getVegetables());
+            System.out.println("= 소스: " + sandwich.getSauces());
+            System.out.println("= 가격: " + sandwich.getPrice());
+        }
+
+        // 주문된 추가 메뉴 출력
+        for (ExtraMenu extraMenu : order.getExtraMenus()) {
+            System.out.println("== ============ 추가메뉴 ===============");
+            System.out.println("= 추가 메뉴: " + extraMenu.getType());
+            System.out.println("= 가격: " + extraMenu.getPrice());
+        }
+
         System.out.println("======================================");
     }
 }
