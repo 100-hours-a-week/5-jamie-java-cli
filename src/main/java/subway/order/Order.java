@@ -1,44 +1,55 @@
 package subway.order;
 
 import subway.delivery.Delivery;
-import subway.maker.SandwichMaker;
 
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
+import subway.maker.SandwichMaker;
 
 public class Order {
 
     Scanner sc = new Scanner(System.in);
     SandwichMaker sandwichMaker = new SandwichMaker();
     Delivery delivery = new Delivery();
+
     boolean status;
     public static CountDownLatch latch = new CountDownLatch(1);
 
-    public Order() {
-    }
+    public Order() {}
 
     public void start() {
         System.out.println("============== KAKAOWAY ==============");
         System.out.println("=            주문을 시작합니다.          =");
         System.out.println("=     원하시는 주문을 선택해주세요. (1/2)   =");
-        System.out.println("=                                    =");
-        System.out.println("=         1. 샌드위치 주문하기           =");
-        System.out.println("=         2. 사이드 메뉴 주문하기         =");
-        System.out.println("======================================");
 
-        int input = sc.nextInt();
+        do {
+            System.out.println("=                                    =");
+            System.out.println("=         1. 샌드위치 주문하기           =");
+            System.out.println("=         2. 사이드 메뉴 주문하기         =");
+            System.out.println("======================================");
 
-        if (input == 1) {
-            System.out.println("샌드위치 주문하기");
-            // TODO: sandwich 주문
-        } else if (input == 2) {
-            // TODO: extraMenu 주문
-        } else {
-            System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-            start();
-        }
+            String input = sc.nextLine();
 
-        processOrder();
+            // 입력값이 숫자가 아니라면 다시 입력받기
+            if (!input.matches("^[0-9]*$")) {
+                System.out.println("============== KAKAOWAY ==============");
+                System.out.println("=           숫자를 입력해주세요.          =");
+                continue;
+            }
+
+            if (Integer.parseInt(input) == 1) {
+                sandwichMaker.makeSandwich();
+                break;
+            } else if (Integer.parseInt(input) == 2) {
+                // TODO: extraMenu 주문
+                break;
+            } else {
+                System.out.println("============== KAKAOWAY ==============");
+                System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
+            }
+        } while (true);
+
+//        processOrder();
     }
 
     // TODO: calculateTotalPrice() 메소드 구현
@@ -84,25 +95,29 @@ public class Order {
     }
 
     public void processPayment() {
-        System.out.println("============== KAKAOWAY ==============");
-        System.out.println("=            결제를 진행합니다.          =");
-        System.out.println("=      결제 방법을 선택해주세요. (1/2)     =");
-        System.out.println("=                                    =");
-        System.out.println("=         1. 카카오페이 결제             =");
-        System.out.println("=         2. 신용카드 결제              =");
-        System.out.println("======================================");
 
-        int input = sc.nextInt();
-        System.out.println("============== KAKAOWAY ==============");
-        if (input == 1) {
-            System.out.println("=        카카오페이 결제를 진행합니다.      =");
-        } else if (input == 2) {
-            System.out.println("=         신용카드 결제를 진행합니다.       =");
-        } else {
-            System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
+        do {
+            System.out.println("============== KAKAOWAY ==============");
+            System.out.println("=            결제를 진행합니다.          =");
+            System.out.println("=      결제 방법을 선택해주세요. (1/2)     =");
+            System.out.println("=                                    =");
+            System.out.println("=         1. 카카오페이 결제             =");
+            System.out.println("=         2. 신용카드 결제              =");
             System.out.println("======================================");
-            processPayment();
-        }
+
+            int input = sc.nextInt();
+            System.out.println("============== KAKAOWAY ==============");
+            if (input == 1) {
+                System.out.println("=        카카오페이 결제를 진행합니다.      =");
+                break;
+            } else if (input == 2) {
+                System.out.println("=         신용카드 결제를 진행합니다.       =");
+                break;
+            } else {
+                System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
+                System.out.println("======================================");
+            }
+        } while (true);
 
         // 1초 후 결제 안료 문구 표시
         try {
