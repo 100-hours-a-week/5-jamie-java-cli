@@ -25,7 +25,7 @@ public class Cheese extends BasicIngredient {
 
         int i = 1;
         for (String cheese : cheeseTypes) {
-            String formattedString = String.format("%1$-25s", cheese);
+            String formattedString = String.format("%1$-23s", cheese);
             System.out.println("=      " + i + ". " + formattedString + " =");
             i++;
         }

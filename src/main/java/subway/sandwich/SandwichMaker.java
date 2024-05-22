@@ -70,6 +70,11 @@ public class SandwichMaker {
             }
         }, 0, 1000);
 
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 

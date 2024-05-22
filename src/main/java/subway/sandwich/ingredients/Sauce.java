@@ -32,7 +32,7 @@ public class Sauce extends BasicIngredient {
 
         int i = 1;
         for (String sauce : sauces) {
-            String formattedString = String.format("%1$-25s", sauce);
+            String formattedString = String.format("%1$-24s", sauce);
             System.out.println("=      " + i + ". " + formattedString + " =");
             i++;
         }

@@ -2,7 +2,7 @@ package subway.sandwich.ingredients;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,7 +12,7 @@ public class Topping extends Ingredient {
     private long price;
     private final String size;
 
-    static HashMap<String, Integer> toppings15cm = new HashMap<>() {{
+    static LinkedHashMap<String, Integer> toppings15cm = new LinkedHashMap<>() {{
         put("미트", 3000);
         put("에그마요", 2000);
         put("베이컨", 1500);
@@ -22,7 +22,7 @@ public class Topping extends Ingredient {
         put("오믈렛", 1800);
         put("페퍼로니", 1400);
     }};
-    static HashMap<String, Integer> toppings30cm = new HashMap<>() {{
+    static LinkedHashMap<String, Integer> toppings30cm = new LinkedHashMap<>() {{
         put("미트", 6000);
         put("에그마요", 4000);
         put("베이컨", 3000);
@@ -52,7 +52,7 @@ public class Topping extends Ingredient {
     }
 
     public void selectTopping() {
-        HashMap<String, Integer> toppingTypes; // 선택한 사이즈에 따라 토핑 종류 다르게
+        LinkedHashMap<String, Integer> toppingTypes; // 선택한 사이즈에 따라 토핑 종류 다르게
         if (this.size.equals("15cm")) {
             toppingTypes = toppings15cm;
         } else {

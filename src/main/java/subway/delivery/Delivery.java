@@ -1,17 +1,21 @@
 package subway.delivery;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import subway.order.Order;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class Delivery {
+
     private String status = "배달 전";
     private String address;
     private String phoneNumber;
     private String deliveryTime;
 
     Scanner sc = new Scanner(System.in);
+    private int count = 0;
 
     public Delivery() {
     }
@@ -35,15 +39,30 @@ public class Delivery {
 
         updateStatus("배달중");
 
-        // 2초 후 status 업데이트
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                StringBuilder sb = new StringBuilder("=                배달 중");
+                sb.append(".".repeat(Math.max(0, count % 4)));
+                sb.append("           =");
+                System.out.print(sb.toString() + "\r");
+                count++;
+
+                if (count == 5) {
+                    timer.cancel();
+                    System.out.println("=               배달 완료!             =");
+                    System.out.println("======================================");
+                }
+            }
+        }, 0, 1000);
+
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
+            updateStatus("배달완료");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        updateStatus("배달완료");
-        Order.latch.countDown();
     }
 
 
