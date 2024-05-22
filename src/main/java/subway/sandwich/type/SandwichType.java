@@ -1,11 +1,11 @@
 package subway.sandwich.type;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 public class SandwichType {
 
-    static HashMap<String, Integer> sandwich15cm = new HashMap<>() {{
+    static LinkedHashMap<String, Integer> sandwich15cm = new LinkedHashMap<>() {{
         put("에그마요", 5500);
         put("햄", 5800);
         put("참치", 5800);
@@ -24,7 +24,7 @@ public class SandwichType {
         put("스파이시 쉬림프", 7900);
         put("스파이시 이탈리안", 6900);
     }};
-    static HashMap<String, Integer> sandwich30cm = new HashMap<>() {{
+    static LinkedHashMap<String, Integer> sandwich30cm = new LinkedHashMap<>() {{
         put("에그마요", 10400);
         put("햄", 10900);
         put("참치", 10900);
@@ -99,7 +99,7 @@ public class SandwichType {
         } while (true);
     }
 
-    public void selectType(HashMap<String, Integer> sandwichSize) {
+    public void selectType(LinkedHashMap<String, Integer> sandwichSize) {
         System.out.println("============== KAKAOWAY ==============");
         System.out.println("=     [1]  샌드위치 종류를 선택해주세요.     =");
         System.out.println("=                                    =");

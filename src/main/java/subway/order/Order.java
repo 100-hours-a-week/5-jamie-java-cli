@@ -87,10 +87,6 @@ public class Order {
     public int processExtraMenuOrder() {
         ExtraMenu extraMenu = extraMenuAdder.addExtraMenu();
         extraMenus.add(extraMenu);
-        System.out.println("============== KAKAOWAY ==============");
-        System.out.println("=        추가 메뉴가 추가되었습니다.       =");
-        System.out.println(extraMenu.getType());
-        System.out.println(extraMenu.getPrice());
 
         return askForAdditionalOrder();
     }
@@ -123,7 +119,6 @@ public class Order {
         } while (true);
     }
 
-
     public String calculateTotalPrice() {
         long totalPrice = 0;
 
@@ -143,9 +138,9 @@ public class Order {
         String totalPrice = calculateTotalPrice();
 
         System.out.println("============== KAKAOWAY ==============");
-        System.out.println("=            주문이 완료되었습니다.       =");
-        System.out.println("=      결제 예정 금액은 " + totalPrice + "원 입니다.   =");
-        System.out.println("=        결제를 진행하시겠습니까? (Y/N)    =");
+        System.out.println("=          주문이 완료되었습니다.         =");
+        System.out.println("=    결제 예정 금액은 " + totalPrice + "원 입니다.     =");
+        System.out.println("=      결제를 진행하시겠습니까? (Y/N)      =");
         System.out.println("======================================");
 
         sc = new Scanner(System.in);
@@ -153,20 +148,9 @@ public class Order {
         if (input.equals("Y") || input.equals("y")) {
             processPayment();
 
-            try {
-                sandwichMaker.waitForSandwich();
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            sandwichMaker.waitForSandwich(); // 샌드위치 제조
 
-            delivery.processDelivery();
-
-            try { // processDelivery() 메소드가 끝나면 latch.await()가 끝나면서 다음 코드 실행
-                latch.await();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            delivery.processDelivery(); // 배달
 
             if (delivery.getStatus().equals("배달완료")) {
                 this.status = true;

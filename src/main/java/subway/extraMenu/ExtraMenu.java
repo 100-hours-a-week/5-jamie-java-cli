@@ -1,6 +1,6 @@
 package subway.extraMenu;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 public class ExtraMenu {
@@ -8,7 +8,7 @@ public class ExtraMenu {
     private String type;
     private long price;
 
-    private final HashMap<String, Integer> sideMenus = new HashMap<>() {{
+    private final LinkedHashMap<String, Integer> sideMenus = new LinkedHashMap<>() {{
         put("콘 수프 (하프)", 2400);
         put("머쉬룸 수프 (하프)", 2400);
         put("콘 수프 (레귤러)", 3900);
@@ -18,14 +18,14 @@ public class ExtraMenu {
         put("과자 칩", 1300);
         put("고구마 칩", 2200);
     }};
-    private final HashMap<String, Integer> cookies = new HashMap<>() {{
+    private final LinkedHashMap<String, Integer> cookies = new LinkedHashMap<>() {{
         put("초코칩 쿠키", 1300);
         put("더블 초코칩 쿠키", 1300);
         put("오트밀 레이즌 쿠키", 1300);
         put("라즈베리 치즈케익 쿠키", 1300);
         put("화이트 초코 마카다미아 쿠키", 1300);
     }};
-    private final HashMap<String, Integer> drinks = new HashMap<>() {{
+    private final LinkedHashMap<String, Integer> drinks = new LinkedHashMap<>() {{
         put("코카콜라", 2000);
         put("스프라이트", 2000);
         put("코카콜라 제로", 2000);
@@ -61,7 +61,7 @@ public class ExtraMenu {
         } while (true);
     }
 
-    public void selectDetailExtraMenu(HashMap<String, Integer> extraMenus) {
+    public void selectDetailExtraMenu(LinkedHashMap<String, Integer> extraMenus) {
         int listSize = extraMenus.size();
 
         System.out.println("============== KAKAOWAY ==============");
