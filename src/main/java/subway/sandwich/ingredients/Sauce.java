@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Sauce extends BasicIngredient {
+public class Sauce extends Ingredient {
 
     private List<String> list;
     static String[] sauces = {"랜치", "스위트 어니언", "마요네즈", "스위트 칠리", "핫 칠리", "스모크 바비큐", "허니 머스타드",
