@@ -2,7 +2,7 @@ package subway.sandwich.ingredients;
 
 import java.util.Scanner;
 
-public class Cheese extends BasicIngredient {
+public class Cheese extends Ingredient {
 
     private String type;
     static String[] cheeseTypes = {"모차렐라 치즈", "아메리칸 치즈", "슈레드 치즈"};
