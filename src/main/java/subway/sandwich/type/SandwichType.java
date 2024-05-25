@@ -45,17 +45,17 @@ public class SandwichType {
     }};
 
     private String type;
-    private long price;
+    private int price;
     private String size;
 
     public SandwichType() {
     }
 
-    public String getName() {
+    public String getType() {
         return type;
     }
 
-    public long getPrice() {
+    public int getPrice() {
         return price;
     }
 

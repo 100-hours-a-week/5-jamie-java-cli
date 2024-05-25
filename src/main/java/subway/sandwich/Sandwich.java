@@ -14,14 +14,13 @@ public class Sandwich {
     private List<String> vegetables = new ArrayList<>();
     private List<String> sauces = new ArrayList<>();
     private List<String> toppings = new ArrayList<>();
-    private long price;
+    private int price;
 
     public Sandwich() {
     }
 
-    public void setType(SandwichType sandwichType) {
-        this.type = sandwichType.getName();
-        this.price += sandwichType.getPrice();
+    public void setType(String type) {
+        this.type = type;
     }
 
     public void setSize(String size) {
@@ -48,7 +47,7 @@ public class Sandwich {
         this.toppings = toppings;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(int price) {
         this.price += price;
     }
 

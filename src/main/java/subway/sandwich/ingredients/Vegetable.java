@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Vegetable extends Ingredient {
 
     private List<String> list;
-    static String[] vegetables = {"양상추", "토마토", "오이", "피망", "양파", "피클", "올리브", "할라피뇨"};
+    private static final String[] vegetables = {"양상추", "토마토", "오이", "피망", "양파", "피클", "올리브", "할라피뇨"};
 
     public Vegetable() {
     }

@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Sauce extends Ingredient {
 
     private List<String> list;
-    static String[] sauces = {"랜치", "스위트 어니언", "마요네즈", "스위트 칠리", "핫 칠리", "스모크 바비큐", "허니 머스타드",
+    private static final String[] sauces = {"랜치", "스위트 어니언", "마요네즈", "스위트 칠리", "핫 칠리", "스모크 바비큐", "허니 머스타드",
         "사우스웨스트 치폴레", "홀스래디쉬", "머스타드", "올리브 오일", "레드와인 식초", "소금", "후추"};
 
     public Sauce() {

@@ -7,7 +7,7 @@ public class Ingredient {
     protected String type;
     protected List<String> list;
     protected List<String> toppings = new ArrayList<>();
-    protected long price;
+    protected int price;
 
     public Ingredient() {
     }
@@ -18,7 +18,7 @@ public class Ingredient {
     public void select(List<String> list) { // 야채, 소스 선택
         this.list = list;
     }
-    public void select(String type, long price) { // 토핑 선택)
+    public void select(String type, int price) { // 토핑 선택)
         this.toppings.add(type);
         this.price += price;
     }
