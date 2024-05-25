@@ -20,7 +20,6 @@ public class Order {
     Delivery delivery = new Delivery();
 
     boolean status;
-    public static CountDownLatch latch = new CountDownLatch(1);
 
     ArrayList<Sandwich> sandwiches = new ArrayList<>();
     ArrayList<ExtraMenu> extraMenus = new ArrayList<>();
@@ -56,6 +55,7 @@ public class Order {
                 } else {
                     System.out.println("============== KAKAOWAY ==============");
                     System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
+                    continue;
                 }
 
                 isAdditionalOrder = true;
@@ -143,29 +143,31 @@ public class Order {
         System.out.println("=      결제를 진행하시겠습니까? (Y/N)      =");
         System.out.println("======================================");
 
-        sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        if (input.equals("Y") || input.equals("y")) {
-            processPayment();
+        do {
+            sc = new Scanner(System.in);
+            String input = sc.nextLine();
+            if (input.equals("Y") || input.equals("y")) {
+                processPayment();
 
-            sandwichMaker.waitForSandwich(); // 샌드위치 제조
+                sandwichMaker.waitForSandwich(); // 샌드위치 제조
 
-            delivery.processDelivery(); // 배달
+                delivery.processDelivery(); // 배달
 
-            if (delivery.getStatus().equals("배달완료")) {
-                this.status = true;
+                if (delivery.getStatus().equals("배달완료")) {
+                    this.status = true;
+                }
+
+            } else if (input.equals("N") || input.equals("n")) {
+                System.out.println("============== KAKAOWAY ==============");
+                System.out.println("=   주문을 취소합니다. 다음에 또 이용해주세요! =");
+                System.out.println("======================================");
+                System.exit(0); // 프로그램 종료
+            } else {
+                System.out.println("============== KAKAOWAY ==============");
+                System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
+                System.out.println("======================================");
             }
-
-        } else if (input.equals("N") || input.equals("n")) {
-            System.out.println("============== KAKAOWAY ==============");
-            System.out.println("=   주문을 취소합니다. 다음에 또 이용해주세요! =");
-            System.out.println("======================================");
-            System.exit(0); // 프로그램 종료
-        } else {
-            System.out.println("============== KAKAOWAY ==============");
-            System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
-            System.out.println("======================================");
-        }
+        } while (true);
     }
 
     public void processPayment() {
