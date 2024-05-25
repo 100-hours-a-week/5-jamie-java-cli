@@ -9,10 +9,10 @@ import java.util.Scanner;
 public class Topping extends Ingredient {
 
     private String type;
-    private long price;
+    private int price;
     private final String size;
 
-    static LinkedHashMap<String, Integer> toppings15cm = new LinkedHashMap<>() {{
+    private static final LinkedHashMap<String, Integer> toppings15cm = new LinkedHashMap<>() {{
         put("미트", 3000);
         put("에그마요", 2000);
         put("베이컨", 1500);
@@ -22,7 +22,7 @@ public class Topping extends Ingredient {
         put("오믈렛", 1800);
         put("페퍼로니", 1400);
     }};
-    static LinkedHashMap<String, Integer> toppings30cm = new LinkedHashMap<>() {{
+    private static final LinkedHashMap<String, Integer> toppings30cm = new LinkedHashMap<>() {{
         put("미트", 6000);
         put("에그마요", 4000);
         put("베이컨", 3000);
@@ -39,7 +39,7 @@ public class Topping extends Ingredient {
     }
 
     @Override
-    public void select(String type, long price) {
+    public void select(String type, int price) {
         super.select(type, price);
     }
 
@@ -47,7 +47,7 @@ public class Topping extends Ingredient {
         return super.toppings;
     }
 
-    public long getPrice() {
+    public int getPrice() {
         return super.price;
     }
 
@@ -66,7 +66,6 @@ public class Topping extends Ingredient {
         System.out.println("=                                    =");
         System.out.println("=          2개 이상의 토핑 추가 시        =");
         System.out.println("=       숫자를 **띄어서** 입력해주세요.     =");
-        System.out.println("=      모두 선택하시려면 0을 입력해주세요.    =");
         System.out.println("=                                    =");
 
         int i = 1;
@@ -93,26 +92,21 @@ public class Topping extends Ingredient {
             }
 
             // 입력값의 숫자들을 하나씩 리스트에 저장
-            if (!input.contains(" ") && Integer.parseInt(input) == 0) {
-                selectedNumList.addAll(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
-                break;
-            } else {
-                boolean isValid = true;
+            boolean isValid = true;
 
-                for (String st : input.split(" ")) {
-                    if (Integer.parseInt(st) > toppingTypes.size()
-                        || Integer.parseInt(st) < 1) {
-                        isValid = false;
-                        System.out.println("============== KAKAOWAY ==============");
-                        System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
-                        System.out.println("======================================");
-                        break;
-                    }
-                    selectedNumList.add(Integer.parseInt(st));
-                }
-                if (isValid) {
+            for (String st : input.split(" ")) {
+                if (Integer.parseInt(st) > toppingTypes.size()
+                    || Integer.parseInt(st) < 1) {
+                    isValid = false;
+                    System.out.println("============== KAKAOWAY ==============");
+                    System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
+                    System.out.println("======================================");
                     break;
                 }
+                selectedNumList.add(Integer.parseInt(st));
+            }
+            if (isValid) {
+                break;
             }
         } while (true);
 

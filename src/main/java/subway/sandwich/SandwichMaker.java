@@ -6,7 +6,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import subway.sandwich.ingredients.*;
 import subway.sandwich.type.SandwichType;
-import subway.order.Order;
 
 public class SandwichMaker {
 
@@ -18,7 +17,8 @@ public class SandwichMaker {
         SandwichType sandwichType = new SandwichType();
         sandwichType.selectSize();
         sandwich.setSize(sandwichType.getSize());
-        sandwich.setType(sandwichType);
+        sandwich.setType(sandwichType.getType());
+        sandwich.setPrice(sandwichType.getPrice());
 
         Bread bread = new Bread();
         bread.selectBread();
@@ -45,7 +45,6 @@ public class SandwichMaker {
         sauce.selectSauces();
         sandwich.setSauces(sauce.getList());
 
-        Order.latch.countDown();
         return sandwich;
     }
 
