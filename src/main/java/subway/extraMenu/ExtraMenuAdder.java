@@ -43,7 +43,7 @@ public class ExtraMenuAdder {
                 Salad salad = new Salad();
                 salad.selectSalad();
 
-                extraMenu.setName(salad.getName());
+                extraMenu.setName(salad.getName() + " 샐러드");
                 extraMenu.setPrice(salad.getPrice());
                 extraMenu.setToppings(salad.getToppings());
             }
