@@ -85,7 +85,7 @@ public class Order {
     }
 
     public int processExtraMenuOrder() {
-        ExtraMenu extraMenu = extraMenuAdder.addExtraMenu();
+        ExtraMenu extraMenu = extraMenuAdder.addExtraMenu(this);
         extraMenus.add(extraMenu);
 
         return askForAdditionalOrder();
@@ -149,13 +149,17 @@ public class Order {
             if (input.equals("Y") || input.equals("y")) {
                 processPayment();
 
-                sandwichMaker.waitForSandwich(); // 샌드위치 제조
+                if (!sandwiches.isEmpty()) { // 샌드위치 주문 시
+                    sandwichMaker.waitForSandwich(); // 샌드위치 제조
+                }
 
                 delivery.processDelivery(); // 배달
 
                 if (delivery.getStatus().equals("배달완료")) {
                     this.status = true;
                 }
+
+                break;
 
             } else if (input.equals("N") || input.equals("n")) {
                 System.out.println("============== KAKAOWAY ==============");

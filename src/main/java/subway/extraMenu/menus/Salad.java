@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.CountDownLatch;
 import subway.extraMenu.ExtraMenu;
 
 public class Salad extends ExtraMenu {
@@ -12,8 +11,6 @@ public class Salad extends ExtraMenu {
     private String name;
     protected List<String> toppings = new ArrayList<>();
     protected int price;
-
-    CountDownLatch latch = new CountDownLatch(1);
 
     private static final LinkedHashMap<String, Integer> salads = new LinkedHashMap<>() {{
         put("스파이시 쉬림프", 9700);
@@ -47,10 +44,6 @@ public class Salad extends ExtraMenu {
     public void addTopping(List<String> toppings, int price) {
         this.toppings = toppings;
         this.price += price;
-
-        System.out.println("addTopping()");
-        System.out.println("toppings: " + toppings);
-        System.out.println("price: " + price);
     }
 
     public void selectSalad() {
@@ -70,8 +63,9 @@ public class Salad extends ExtraMenu {
         System.out.println("======================================");
 
         int selectedNum;
+        Scanner sc = new Scanner(System.in);
+
         do {
-            Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
 
             if (!input.matches("^[0-9]*$")) {
@@ -89,13 +83,9 @@ public class Salad extends ExtraMenu {
         } while (true);
 
         name = salads.keySet().toArray()[selectedNum - 1].toString();
+        price = salads.get(name);
 
         askForTopping();
-
-        System.out.println("name: " + name);
-        System.out.println("toppings: " + toppings);
-        System.out.println("price: " + price);
-
         select(name, toppings, price);
     }
 
@@ -106,8 +96,9 @@ public class Salad extends ExtraMenu {
 
         SaladTopping topping = new SaladTopping();
 
+        Scanner sc = new Scanner(System.in);
+
         do {
-            Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
 
             if (input.equals("Y") || input.equals("y")) {
@@ -125,17 +116,5 @@ public class Salad extends ExtraMenu {
                 System.out.println("======================================");
             }
         } while (true);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public List<String> getToppings() {
-        return toppings;
-    }
-
-    public int getPrice() {
-        return price;
     }
 }

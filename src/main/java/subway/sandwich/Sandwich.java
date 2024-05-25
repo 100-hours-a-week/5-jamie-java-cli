@@ -2,8 +2,6 @@ package subway.sandwich;
 
 import java.util.ArrayList;
 import java.util.List;
-import subway.sandwich.type.SandwichType;
-
 
 public class Sandwich {
 

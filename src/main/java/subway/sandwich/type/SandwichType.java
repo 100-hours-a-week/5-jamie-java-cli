@@ -64,6 +64,7 @@ public class SandwichType {
     }
 
     public void selectSize() {
+        Scanner sc = new Scanner(System.in);
 
         System.out.println("============== KAKAOWAY ==============");
         System.out.println("=     샌드위치 크기를 선택해주세요. (1/2)   =");
@@ -74,7 +75,6 @@ public class SandwichType {
             System.out.println("=          2. 30cm 샌드위치            =");
             System.out.println("======================================");
 
-            Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
 
             // 입력값이 숫자가 아니라면 다시 입력받기
@@ -114,8 +114,9 @@ public class SandwichType {
         System.out.println("======================================");
 
         int selectedNum;
+        Scanner sc = new Scanner(System.in);
+
         do {
-            Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
 
             if (!input.matches("^[0-9]*$")) {
