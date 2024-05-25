@@ -40,8 +40,8 @@ public class Wrap extends ExtraMenu {
         System.out.println("======================================");
 
         int selectedNum;
+        Scanner sc = new Scanner(System.in);
         do {
-            Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
 
             if (!input.matches("^[0-9]*$")) {
@@ -58,13 +58,10 @@ public class Wrap extends ExtraMenu {
             }
         } while (true);
 
-        String selectedWrap = wraps.keySet().toArray()[selectedNum - 1].toString();
+        name = wraps.keySet().toArray()[selectedNum - 1].toString();
+        price = wraps.get(name);
 
-        select(selectedWrap, wraps.get(selectedWrap));
-    }
-
-    public String getName() {
-        return name;
+        select(name, price);
     }
 
     public int getPrice() {

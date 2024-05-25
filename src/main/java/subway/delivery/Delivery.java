@@ -49,7 +49,7 @@ public class Delivery {
                 System.out.print(sb.toString() + "\r");
                 count++;
 
-                if (count == 5) {
+                if (count == 4) {
                     timer.cancel();
                     System.out.println("=               배달 완료!             =");
                     System.out.println("======================================");

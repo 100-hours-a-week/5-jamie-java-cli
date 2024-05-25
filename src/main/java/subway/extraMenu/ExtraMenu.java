@@ -7,6 +7,7 @@ public class ExtraMenu {
 
     protected String name;
     protected List<String> toppings = new ArrayList<>();
+    protected List<String> setMenus = new ArrayList<>();
     protected int price;
 
     public ExtraMenu() {
@@ -16,10 +17,15 @@ public class ExtraMenu {
         this.name = name;
         this.price = price;
     }
-    public void select(String name, List<String> toppings, int price) {
+    public void select(String name, List<String> list, int price) {
         this.name = name;
-        this.toppings = toppings;
         this.price = price;
+
+        if (name.equals("세트 메뉴")) {
+            this.setMenus = list;
+        } else {
+            this.toppings = list;
+        }
     }
 
     public void setName(String name) {
@@ -28,6 +34,10 @@ public class ExtraMenu {
 
     public void setToppings(List<String> toppings) {
         this.toppings = toppings;
+    }
+
+    public void setSetMenus(List<String> setMenus) {
+        this.setMenus = setMenus;
     }
 
     public void setPrice(int price) {
@@ -40,6 +50,10 @@ public class ExtraMenu {
 
     public List<String> getToppings() {
         return toppings;
+    }
+
+    public List<String> getSetMenus() {
+        return setMenus;
     }
 
     public int getPrice() {

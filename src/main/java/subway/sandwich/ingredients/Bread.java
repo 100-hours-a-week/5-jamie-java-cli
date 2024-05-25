@@ -33,8 +33,9 @@ public class Bread extends Ingredient {
         System.out.println("======================================");
 
         int selectedNum;
+        Scanner sc = new Scanner(System.in);
+
         do {
-            Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
 
             if (!input.matches("^[0-9]*$")) {

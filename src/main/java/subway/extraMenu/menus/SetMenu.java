@@ -1,56 +1,41 @@
 package subway.extraMenu.menus;
 
-import java.util.Scanner;
+import java.util.List;
 import subway.extraMenu.ExtraMenu;
 
-public class Others extends ExtraMenu {
+public class SetMenu extends ExtraMenu {
 
-    public Others() {
+    protected String name;
+    protected String cookie;
+    protected String drink;
 
+    public SetMenu() {
     }
 
     @Override
-    public void select(String name, int price) {
-        super.select(name, price);
+    public void select(String name, List<String> list, int price) {
+        super.select(name, list, price);
     }
 
-    public void selectDetails(String name, int price) {
-        this.name = name;
-        this.price = price;
+    public void setCookie(String name) {
+        this.cookie = name;
     }
 
-    public void selectOthers() {
-        System.out.println("============== KAKAOWAY ==============");
-        System.out.println("=     사이드 메뉴를 선택해주세요. (1~3)     =");
-        System.out.println("=                                    =");
-        System.out.println("=         1. 쿠키                     =");
-        System.out.println("=         2. 음료수                    =");
-        System.out.println("=         3. 기타                     =");
-        System.out.println("======================================");
+    public void setDrink(String name) {
+        this.drink = name;
+    }
 
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
+    public void selectSetMenus() {
+        Cookie cookie = new Cookie();
+        cookie.selectCookie();
+        setCookie(cookie.getCookie());
 
-        label:
-        do {
-            switch (input) {
-                case "1":
-                    Cookie cookie = new Cookie();
-                    cookie.selectCookie();
-                    break label;
-                case "2":
-                    select("음료수", 2000);
-                    break label;
-                case "3":
-                    select("기타", 1000);
-                    break label;
-                default:
-                    System.out.println("============== KAKAOWAY ==============");
-                    System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
-                    System.out.println("======================================");
-                    input = sc.nextLine();
-                    break;
-            }
-        } while (true);
+        Drink drink = new Drink();
+        drink.selectDrink();
+        setDrink(drink.getDrink());
+
+        this.name = "세트 메뉴";
+
+        select(name, List.of(this.cookie, this.drink), 2500);
     }
 }

@@ -78,8 +78,9 @@ public class Topping extends Ingredient {
         System.out.println("======================================");
 
         List<Integer> selectedNumList = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+
         do {
-            Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
 
             if (input.trim().isEmpty()) {
