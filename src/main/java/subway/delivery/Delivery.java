@@ -26,7 +26,15 @@ public class Delivery {
         String address = sc.nextLine();
 
         System.out.print("전화번호 (숫자만 입력): ");
-        String phoneNumber = sc.nextLine();
+        String phoneNumber;
+        do {
+            phoneNumber = sc.nextLine();
+
+            if (phoneNumber.matches("^[0-9]*$")) {
+                break;
+            }
+            System.out.print("숫자만 입력해주세요: ");
+        } while (true);
 
         System.out.println("============== KAKAOWAY ==============");
         System.out.println("=     배달 주소와 전화번호가 등록되었습니다.   =");
