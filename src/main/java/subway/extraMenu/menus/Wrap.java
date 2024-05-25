@@ -6,7 +6,6 @@ import subway.extraMenu.ExtraMenu;
 
 public class Wrap extends ExtraMenu {
 
-    private String name;
     private int price;
 
     private static final LinkedHashMap<String, Integer> wraps = new LinkedHashMap<>() {{
@@ -58,7 +57,7 @@ public class Wrap extends ExtraMenu {
             }
         } while (true);
 
-        name = wraps.keySet().toArray()[selectedNum - 1].toString();
+        String name = wraps.keySet().toArray()[selectedNum - 1].toString();
         price = wraps.get(name);
 
         select(name, price);

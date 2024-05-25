@@ -17,6 +17,7 @@ public class ExtraMenu {
         this.name = name;
         this.price = price;
     }
+
     public void select(String name, List<String> list, int price) {
         this.name = name;
         this.price = price;

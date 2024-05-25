@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class Sauce extends Ingredient {
 
-    private List<String> list;
-    private static final String[] sauces = {"랜치", "스위트 어니언", "마요네즈", "스위트 칠리", "핫 칠리", "스모크 바비큐", "허니 머스타드",
+    private static final String[] sauces = {"랜치", "스위트 어니언", "마요네즈", "스위트 칠리", "핫 칠리", "스모크 바비큐",
+        "허니 머스타드",
         "사우스웨스트 치폴레", "홀스래디쉬", "머스타드", "올리브 오일", "레드와인 식초", "소금", "후추"};
 
     public Sauce() {
@@ -55,7 +55,6 @@ public class Sauce extends Ingredient {
             String[] inputList = input.split(" "); // 개수 제한을 위해 배열로 저장
 
             if (inputList.length > 3) {
-                isValid = false;
                 System.out.println("============== KAKAOWAY ==============");
                 System.out.println("=4개 이상 선택할 수 없습니다. 다시 입력해주세요.=");
                 System.out.println("======================================");

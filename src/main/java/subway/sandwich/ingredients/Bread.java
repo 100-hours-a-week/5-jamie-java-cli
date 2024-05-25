@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Bread extends Ingredient {
 
-    private String type;
     private static final String[] breadTypes = {"화이트", "하티", "파마산오레가노", "위트", "플랫브레드", "허니오트"};
 
     public Bread() {

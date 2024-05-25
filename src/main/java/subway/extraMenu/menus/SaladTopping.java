@@ -30,6 +30,7 @@ public class SaladTopping extends Salad {
         selectedToppingPrice += price;
     }
 
+
     public void selectSaladTopping() {
         int listSize = toppingTypes.size();
 

@@ -10,8 +10,6 @@ import java.util.Scanner;
 public class Delivery {
 
     private String status = "배달 전";
-    private String address;
-    private String phoneNumber;
     private String deliveryTime;
 
     Scanner sc = new Scanner(System.in);
@@ -25,13 +23,15 @@ public class Delivery {
         System.out.println("======================================");
 
         System.out.print("배달 주소: ");
-        this.address = sc.nextLine();
+        String address = sc.nextLine();
 
         System.out.print("전화번호 (숫자만 입력): ");
-        this.phoneNumber = sc.nextLine();
+        String phoneNumber = sc.nextLine();
 
         System.out.println("============== KAKAOWAY ==============");
         System.out.println("=     배달 주소와 전화번호가 등록되었습니다.   =");
+        System.out.println("=     주소: " + address);
+        System.out.println("=     전화번호: " + phoneNumber);
 
         assignDeliveryTime();
 

@@ -8,8 +8,6 @@ import java.util.Scanner;
 
 public class Topping extends Ingredient {
 
-    private String type;
-    private int price;
     private final String size;
 
     private static final LinkedHashMap<String, Integer> toppings15cm = new LinkedHashMap<>() {{

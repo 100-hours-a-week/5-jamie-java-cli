@@ -28,7 +28,6 @@ public class ExtraMenuAdder {
             System.out.println("======================================");
         }
 
-
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
