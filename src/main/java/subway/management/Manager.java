@@ -8,7 +8,7 @@ public class Manager implements Runnable {
     private int outOfStockItemsCount = 0;
     private final Inventory inventory;
     private final List<String> items;
-    private Random random = new Random();
+    private final Random random = new Random();
 
     public Manager(Inventory inventory, List<String> items) {
         this.inventory = inventory;
@@ -17,7 +17,7 @@ public class Manager implements Runnable {
 
     @Override
     public void run() {
-        while (outOfStockItemsCount < 3) {
+        while (outOfStockItemsCount < MAX_OUT_OF_STOCK_ITEMS) {
             try {
                 Thread.sleep(5000 + random.nextInt(15000)); // 5~20초 랜덤 대기
 
