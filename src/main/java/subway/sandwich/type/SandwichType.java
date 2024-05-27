@@ -114,7 +114,7 @@ public class SandwichType {
         }
         System.out.println("======================================");
 
-        int selectedNum;
+        int selectedNum = 0;
         Scanner sc = new Scanner(System.in);
 
         do {

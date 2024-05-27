@@ -36,7 +36,7 @@ public class Cookie extends SetMenu {
 
         Scanner sc = new Scanner(System.in);
 
-        int selectedNum;
+        int selectedNum = 0;
         do {
             String input = sc.nextLine().trim(); // 공백 제거
 

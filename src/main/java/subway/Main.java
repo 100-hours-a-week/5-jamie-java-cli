@@ -34,12 +34,13 @@ public class Main {
                 break;
             } else if (input.equals("N") || input.equals("n")) {
                 System.out.println("============== KAKAOWAY ==============");
-                System.out.println("=          프로그램을 종료합니다.          =");
+                System.out.println("=       ❗️  프로그램을 종료합니다.        =");
                 System.out.println("======================================");
                 System.exit(0); // 프로그램 종료
             } else {
                 System.out.println("============== KAKAOWAY ==============");
-                System.out.println("= 잘못된 입력입니다. 다시 입력해주세요. (Y/N) =");
+                System.out.println("=          ❗잘못된 입력입니다.          =");
+                System.out.println("=        다시 입력해주세요. (Y/N)        =");
                 System.out.println("======================================");
             }
         } while (true);
@@ -71,17 +72,19 @@ public class Main {
 
         // 주문된 추가 메뉴 출력
         for (ExtraMenu extraMenu : order.getExtraMenus()) {
-            System.out.println("===== 🥗 추가메뉴");
-            System.out.println("= 추가 메뉴: " + extraMenu.getName());
+            if (extraMenu.getName() != null) {
+                System.out.println("===== 🥗 추가메뉴");
+                System.out.println("= 추가 메뉴: " + extraMenu.getName());
 
-            if (!extraMenu.getToppings().isEmpty()) {
-                System.out.println("= 토핑: " + extraMenu.getToppings());
-            }
-            if (!extraMenu.getSetMenus().isEmpty()) {
-                System.out.println("= 메뉴: " + extraMenu.getSetMenus());
-            }
+                if (!extraMenu.getToppings().isEmpty()) {
+                    System.out.println("= 토핑: " + extraMenu.getToppings());
+                }
+                if (!extraMenu.getSetMenus().isEmpty()) {
+                    System.out.println("= 메뉴: " + extraMenu.getSetMenus());
+                }
 
-            System.out.println("= 가격: " + extraMenu.getPrice());
+                System.out.println("= 가격: " + extraMenu.getPrice());
+            }
         }
     }
 }

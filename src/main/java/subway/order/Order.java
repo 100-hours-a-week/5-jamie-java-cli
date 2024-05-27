@@ -6,31 +6,42 @@ import java.util.List;
 import subway.delivery.Delivery;
 
 import java.util.Scanner;
-import java.util.concurrent.CountDownLatch;
 import subway.extraMenu.ExtraMenu;
 import subway.extraMenu.ExtraMenuAdder;
+import subway.management.Inventory;
+import subway.management.Manager;
 import subway.sandwich.Sandwich;
 import subway.sandwich.SandwichMaker;
 
 public class Order {
 
     Scanner sc = new Scanner(System.in);
+    Inventory inventory = new Inventory();
     SandwichMaker sandwichMaker = new SandwichMaker();
-    ExtraMenuAdder extraMenuAdder = new ExtraMenuAdder();
+    ExtraMenuAdder extraMenuAdder = new ExtraMenuAdder(inventory);
     Delivery delivery = new Delivery();
 
     boolean status;
+    private final List<String> items = inventory.getItems();
 
     ArrayList<Sandwich> sandwiches = new ArrayList<>();
     ArrayList<ExtraMenu> extraMenus = new ArrayList<>();
+
 
     public Order() {
     }
 
     public void start() {
+        Thread managerThread = new Thread(new Manager(inventory, items));
+        managerThread.start();
+
         System.out.println("============== KAKAOWAY ==============");
         System.out.println("=            주문을 시작합니다.          =");
         System.out.println("=     원하시는 주문을 선택해주세요. (1/2)   =");
+        System.out.println("=                                    =");
+        System.out.println("=         1. 샌드위치 주문하기           =");
+        System.out.println("=         2. 추가 메뉴 주문하기          =");
+        System.out.println("======================================");
 
         takeOrder();
     }
@@ -41,11 +52,6 @@ public class Order {
 
         do {
             if (!isAdditionalOrder) {
-                System.out.println("=                                    =");
-                System.out.println("=         1. 샌드위치 주문하기           =");
-                System.out.println("=         2. 추가 메뉴 주문하기         =");
-                System.out.println("======================================");
-
                 String input = sc.nextLine();
 
                 if (input.equals("1")) {
@@ -54,7 +60,8 @@ public class Order {
                     nextSelection = processExtraMenuOrder();
                 } else {
                     System.out.println("============== KAKAOWAY ==============");
-                    System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
+                    System.out.println("=   ❗️ 잘못된 입력입니다. 다시 입력해주세요.  =");
+                    System.out.println("======================================");
                     continue;
                 }
 
@@ -69,7 +76,7 @@ public class Order {
                     break;
                 } else {
                     System.out.println("============== KAKAOWAY ==============");
-                    System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
+                    System.out.println("=   ❗️ 잘못된 입력입니다. 다시 입력해주세요.  =");
                 }
             }
 
@@ -92,18 +99,24 @@ public class Order {
     }
 
     public int askForAdditionalOrder() {
+
         System.out.println("============== KAKAOWAY ==============");
-        System.out.println("=        추가 주문을 하시겠습니까? (1~3)   =");
+        System.out.println("=       추가 주문을 하시겠습니까? (1~3)    =");
+        System.out.println("=                                    =");
+        System.out.println("=  1. 샌드위치 주문하기                  =");
+
+        if (!inventory.isInStock("랩") && !inventory.isInStock("샐러드") && !inventory.isInStock(
+            "세트메뉴")) {
+            System.out.println("=  2. 추가 메뉴 주문하기 (품절 / 주문 불가) =");
+        } else {
+            System.out.println("=  2. 추가 메뉴 주문하기                 =");
+        }
+
+        System.out.println("=  3. 주문 완료하기                     =");
+        System.out.println("======================================");
 
         do {
-            System.out.println("=                                    =");
-            System.out.println("=        1. 샌드위치 주문하기            =");
-            System.out.println("=        2. 추가 메뉴 주문하기           =");
-            System.out.println("=        3. 주문 완료하기               =");
-            System.out.println("======================================");
-
             String input = sc.nextLine();
-
             switch (input) {
                 case "1":
                     return 1;
@@ -113,7 +126,7 @@ public class Order {
                     return 3;
                 default:
                     System.out.println("============== KAKAOWAY ==============");
-                    System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
+                    System.out.println("=   ❗️ 잘못된 입력입니다. 다시 입력해주세요.  =");
                     break;
             }
         } while (true);
@@ -163,12 +176,12 @@ public class Order {
 
             } else if (input.equals("N") || input.equals("n")) {
                 System.out.println("============== KAKAOWAY ==============");
-                System.out.println("=   주문을 취소합니다. 다음에 또 이용해주세요! =");
+                System.out.println("= ❗️주문을 취소합니다. 다음에 또 이용해주세요! =");
                 System.out.println("======================================");
                 System.exit(0); // 프로그램 종료
             } else {
                 System.out.println("============== KAKAOWAY ==============");
-                System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
+                System.out.println("=   ❗️ 잘못된 입력입니다. 다시 입력해주세요.  =");
                 System.out.println("======================================");
             }
         } while (true);
@@ -194,7 +207,7 @@ public class Order {
                 System.out.println("=         신용카드 결제를 진행합니다.       =");
                 break;
             } else {
-                System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
+                System.out.println("=   ❗️ 잘못된 입력입니다. 다시 입력해주세요.  =");
                 System.out.println("======================================");
             }
         } while (true);
@@ -205,7 +218,7 @@ public class Order {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("=           결제가 완료되었습니다.        =");
+        System.out.println("=       💳   결제가 완료되었습니다.       =");
     }
 
     public boolean getStatus() {
