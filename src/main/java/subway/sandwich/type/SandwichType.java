@@ -68,33 +68,34 @@ public class SandwichType {
 
         System.out.println("============== KAKAOWAY ==============");
         System.out.println("=     샌드위치 크기를 선택해주세요. (1/2)   =");
+        System.out.println("=                                    =");
+        System.out.println("=          1. 15cm 샌드위치            =");
+        System.out.println("=          2. 30cm 샌드위치            =");
+        System.out.println("======================================");
 
         do {
-            System.out.println("=                                    =");
-            System.out.println("=          1. 15cm 샌드위치            =");
-            System.out.println("=          2. 30cm 샌드위치            =");
-            System.out.println("======================================");
-
-            String input = sc.nextLine();
+            String input = sc.nextLine().trim(); // 공백 제거
 
             // 입력값이 숫자가 아니라면 다시 입력받기
-            if (!input.matches("^[0-9]*$")) {
+            if (input.isEmpty() || !input.matches("^[0-9]*$")) {
                 System.out.println("============== KAKAOWAY ==============");
-                System.out.println("=           숫자를 입력해주세요.          =");
+                System.out.println("=         ❗️ 숫자를 입력해주세요.         =");
+                System.out.println("======================================");
                 continue;
             }
 
-            if (Integer.parseInt(input) == 1) {
+            if (input.equals("1")) {
                 this.size = "15cm";
                 selectType(sandwich15cm);
                 break;
-            } else if (Integer.parseInt(input) == 2) {
+            } else if (input.equals("2")) {
                 this.size = "30cm";
                 selectType(sandwich30cm);
                 break;
             } else {
                 System.out.println("============== KAKAOWAY ==============");
-                System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
+                System.out.println("=   ❗️ 잘못된 입력입니다. 다시 입력해주세요.  =");
+                System.out.println("======================================");
             }
         } while (true);
     }
@@ -117,16 +118,17 @@ public class SandwichType {
         Scanner sc = new Scanner(System.in);
 
         do {
-            String input = sc.nextLine();
+            String input = sc.nextLine().trim(); // 공백 제거
 
-            if (!input.matches("^[0-9]*$")) {
+            // 입력값이 숫자가 아니라면 다시 입력받기
+            if (input.isEmpty() || !input.matches("^[0-9]*$")) {
                 System.out.println("============== KAKAOWAY ==============");
-                System.out.println("=           숫자를 입력해주세요.          =");
+                System.out.println("=         ❗️ 숫자를 입력해주세요.         =");
                 System.out.println("======================================");
             } else if (Integer.parseInt(input) > sandwichSize.size()
                 || Integer.parseInt(input) < 1) {
                 System.out.println("============== KAKAOWAY ==============");
-                System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
+                System.out.println("=   ❗️ 잘못된 입력입니다. 다시 입력해주세요.  =");
                 System.out.println("======================================");
             } else {
                 selectedNum = Integer.parseInt(input);
