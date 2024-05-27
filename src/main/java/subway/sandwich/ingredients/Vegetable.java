@@ -44,9 +44,10 @@ public class Vegetable extends Ingredient {
         do {
             String input = sc.nextLine();
 
+            // 입력값이 숫자가 아니라면 다시 입력받기
             if (!input.matches("^[0-9 ]+$")) {
                 System.out.println("============== KAKAOWAY ==============");
-                System.out.println("=           숫자를 입력해주세요.          =");
+                System.out.println("=         ❗️ 숫자를 입력해주세요.         =");
                 System.out.println("======================================");
                 continue;
             }
@@ -62,7 +63,7 @@ public class Vegetable extends Ingredient {
                     if (Integer.parseInt(st) > vegetables.length || Integer.parseInt(st) < 1) {
                         isValid = false;
                         System.out.println("============== KAKAOWAY ==============");
-                        System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
+                        System.out.println("=   ❗️ 잘못된 입력입니다. 다시 입력해주세요.  =");
                         System.out.println("======================================");
                         break;
                     }

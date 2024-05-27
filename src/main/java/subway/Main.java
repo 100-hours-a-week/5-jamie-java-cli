@@ -58,7 +58,7 @@ public class Main {
 
         // 주문된 샌드위치 출력
         for (Sandwich sandwich : order.getSandwiches()) {
-            System.out.println("===== 샌드위치");
+            System.out.println("===== 🥪 샌드위치");
             System.out.println("= 샌드위치: " + sandwich.getType());
             System.out.println("= 사이즈: " + sandwich.getSize());
             System.out.println("= 빵: " + sandwich.getBread());
@@ -71,7 +71,7 @@ public class Main {
 
         // 주문된 추가 메뉴 출력
         for (ExtraMenu extraMenu : order.getExtraMenus()) {
-            System.out.println("===== 추가메뉴");
+            System.out.println("===== 🥗 추가메뉴");
             System.out.println("= 추가 메뉴: " + extraMenu.getName());
 
             if (!extraMenu.getToppings().isEmpty()) {

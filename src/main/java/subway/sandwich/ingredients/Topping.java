@@ -85,7 +85,7 @@ public class Topping extends Ingredient {
                 break;
             } else if (!input.matches("^[0-9 ]*$")) {
                 System.out.println("============== KAKAOWAY ==============");
-                System.out.println("=           숫자를 입력해주세요.          =");
+                System.out.println("=         ❗️ 숫자를 입력해주세요.         =");
                 System.out.println("======================================");
                 continue;
             }
@@ -98,7 +98,7 @@ public class Topping extends Ingredient {
                     || Integer.parseInt(st) < 1) {
                     isValid = false;
                     System.out.println("============== KAKAOWAY ==============");
-                    System.out.println("=     잘못된 입력입니다. 다시 입력해주세요.   =");
+                    System.out.println("=   ❗️ 잘못된 입력입니다. 다시 입력해주세요.  =");
                     System.out.println("======================================");
                     break;
                 }
