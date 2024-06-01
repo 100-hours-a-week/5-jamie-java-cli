@@ -7,8 +7,9 @@ KCS CLI program for Subway delivery order
 - 서브웨이 샌드위치 주문을 위한 CLI 프로그램
 - 샌드위치 종류, 크기, 빵, 치즈, 추가 토핑, 야채, 소스, 추가 메뉴 선택 가능
 - 랩, 샐러드, 쿠키 세트 메뉴 선택 가능
+- 재고 관리, 주문 관리, 배달 관리 기능 포함
 
-### 파일 구조
+### 프로그램 구조
 
 ```
 .
@@ -26,6 +27,9 @@ KCS CLI program for Subway delivery order
     │       ├── SaladTopping.java
     │       ├── SetMenu.java
     │       └── Wrap.java
+    ├── management
+    │   ├── Inventory.java
+    │   └── Manager.java
     ├── order
     │   └── Order.java
     └── sandwich
@@ -41,10 +45,6 @@ KCS CLI program for Subway delivery order
         └── type
             └── SandwichType.java
 ```
-
-### 클래스 다이어그램
-
-![클래스 다이어그램](docs/diagram.jpg)
 
 ### 유저 시나리오
 
@@ -64,6 +64,7 @@ KCS CLI program for Subway delivery order
     2. 추가메뉴 주문을 선택한다.
         1. 추가메뉴 종류를 선택한다.
         2. 추가메뉴를 선택한다.
+           이 때, 품절된 메뉴는 주문할 수 없다.
 4. 주문을 완료하고, 추가 주문을 진행할지 선택한다.
     1. 추가 주문 - `샌드위치`를 선택하면 `3-1`으로 이동한다.
     2. 추가 주문 - `추가 메뉴`를 선택하면 `3-2`로 이동한다.
@@ -79,5 +80,5 @@ KCS CLI program for Subway delivery order
 
 ### 실행 영상
 
-#### [실행 영상](https://github.com/100-hours-a-week/5-jamie-java-cli/assets/78146904/92e0da1d-06e7-46cc-a226-4682a60da03c)
+#### [실행 영상](https://github.com/100-hours-a-week/5-jamie-java-cli/assets/78146904/335a806a-ee41-4a06-991f-a5d4c1fce08d)
 
